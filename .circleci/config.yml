@@ -24,7 +24,7 @@ jobs:
       #- snyk/scan
       - run:
           name: Build docker image
-          command: docker build --build-arg token=$MICROSCANNER_TOKEN -f
+          command: docker build --build-arg token=$MICROSCANNER_TOKEN
 
       # run tests!
       # this example uses Django's built-in test-runner
