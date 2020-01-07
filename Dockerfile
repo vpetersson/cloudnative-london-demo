@@ -1,9 +1,9 @@
-FROM mongo:3.2.1
+FROM python:3.6-slim
 
-ADD https://get.aquasec.com/microscanner /
+WORKDIR /usr/src/app
 
-RUN chmod +x /microscanner
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
 
-ARG token
-
-RUN /microscanner ${token}
+COPY . .
+CMD [ "python", "./app.py" ]

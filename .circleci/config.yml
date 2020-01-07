@@ -17,15 +17,21 @@ jobs:
       - checkout
       - setup_remote_docker
 
+      # This is a bit redundant since we also install it in Docker below.
       - run:
           name: install dependencies
           command: pip install -r requirements.txt --user
 
       # This enables Snyk scanning of Python dependencies
       #- snyk/scan
+
       - run:
           name: Build docker image
-          command: docker build --build-arg token=$MICROSCANNER_TOKEN .
+          command: docker build .
+
+      - run:
+          name: Build docker image with scanner
+          command: docker build --build-arg token=$MICROSCANNER_TOKEN -f Dockerfile.aqua .
 
       # run tests!
       # this example uses Django's built-in test-runner
