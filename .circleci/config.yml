@@ -19,7 +19,12 @@ jobs:
       - run:
           name: install dependencies
           command: pip install -r requirements.txt --user
-      - snyk/scan
+
+      # This enables Snyk scanning of Python dependencies
+      #- snyk/scan
+      - run:
+          name: Build docker image
+          command: docker build --build-arg token=$MICROSCANNER_TOKEN -f
 
       # run tests!
       # this example uses Django's built-in test-runner
@@ -35,5 +40,7 @@ jobs:
       - store_artifacts:
           path: test-reports
           destination: test-reports
+
 orbs:
+  # This is the helper module for Snyk
   snyk: snyk/snyk@0.0.8
