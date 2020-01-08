@@ -27,11 +27,7 @@ jobs:
 
       - run:
           name: Build docker image
-          command: docker build -t "demo:$CIRCLE_SHA1" .
-
-      - run:
-          name: Build docker image with scanner
-          command: docker build --build-arg token="$AQUA_TOKEN" --build-arg DEMO_IMAGE="demo:$CIRCLE_SHA1" -f Dockerfile.aqua .
+          command: docker build -t "demo:$CIRCLE_SHA1" --build-arg AQUA_TOKEN="$AQUA_TOKEN" .
 
       # run tests!
       # this example uses Django's built-in test-runner

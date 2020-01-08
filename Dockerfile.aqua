@@ -1,7 +1,0 @@
-ARG DEMO_IMAGE=demo
-FROM $DEMO_IMAGE
-
-ADD https://get.aquasec.com/microscanner /
-RUN chmod +x /microscanner
-ARG token
-RUN /microscanner ${token}
