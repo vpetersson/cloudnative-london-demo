@@ -3,11 +3,11 @@ FROM $DEMO_IMAGE
 
 ARG SNYK_TOKEN
 
-RUN apt-get -q update && \
-    apt-get install -y curl
+RUN apt-get -qq update && \
+    apt-get install -qq -y curl
 
 RUN curl -sL https://deb.nodesource.com/setup_13.x | bash -
-RUN apt-get install -y nodejs
+RUN apt-get install -qq -y nodejs
 
 RUN npm install -g snyk
 

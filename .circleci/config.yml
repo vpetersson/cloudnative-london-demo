@@ -2,14 +2,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      # specify the version you desire here
-      # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
       - image: circleci/python:3.6.1
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/postgres:9.4
 
     working_directory: ~/repo
 
@@ -24,34 +17,23 @@ jobs:
               -t "demo:$CIRCLE_SHA1" \
               .
 
-#      - run:
-#          name: Run Aqua on image
-#          command: |
-#              docker build \
-#              -f Dockerfile.aqua \
-#              --build-arg AQUA_TOKEN="$AQUA_TOKEN" \
-#              --build-arg DEMO_IMAGE="demo:$CIRCLE_SHA1" \
-#              .
+      - run:
+          name: Run Aqua on image
+          command: |
+              docker build \
+              -f Dockerfile.aqua \
+              --build-arg AQUA_TOKEN="$AQUA_TOKEN" \
+              --build-arg DEMO_IMAGE="demo:$CIRCLE_SHA1" \
+              .
 
       - run:
-          name: Run Snyk on dependenies
+          name: Run Snyk on dependencies
           command: |
               docker build \
               -f Dockerfile.snyk \
               --build-arg SNYK_TOKEN="$SNYK_TOKEN" \
               --build-arg DEMO_IMAGE="demo:$CIRCLE_SHA1" \
               .
-
-      # run tests!
-      # this example uses Django's built-in test-runner
-      # other common Python testing frameworks include pytest and nose
-      # https://pytest.org
-      # https://nose.readthedocs.io
-      #- run:
-      #    name: run tests
-      #    command: |
-      #      . venv/bin/activate
-      #      python manage.py test
 
       - store_artifacts:
           path: test-reports
