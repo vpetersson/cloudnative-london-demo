@@ -17,15 +17,15 @@ jobs:
               -t "demo:$CIRCLE_SHA1" \
               .
 
-#      - run:
-#          name: Run Snyk on dependencies
-#          command: |
-#              docker build \
-#              -f Dockerfile.snyk \
-#              --build-arg SNYK_TOKEN="$SNYK_TOKEN" \
-#              --build-arg DEMO_IMAGE="demo:$CIRCLE_SHA1" \
-#              .
-#
+      - run:
+          name: Run Snyk on dependencies
+          command: |
+              docker build \
+              -f Dockerfile.snyk \
+              --build-arg SNYK_TOKEN="$SNYK_TOKEN" \
+              --build-arg DEMO_IMAGE="demo:$CIRCLE_SHA1" \
+              .
+
 #      - run:
 #          name: Run Aqua on image
 #          command: |
