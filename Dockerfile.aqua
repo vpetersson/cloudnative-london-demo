@@ -7,7 +7,8 @@ RUN apt-get -qq update && \
     apt-get install -qq -y curl && \
     apt-get clean
 
+# Depending on your environment, you man not want to use '--continue-on-failure'
 RUN curl -s -o /microscanner https://get.aquasec.com/microscanner && \
     chmod +x /microscanner && \
-    /microscanner ${AQUA_TOKEN} && \
+    /microscanner ${AQUA_TOKEN} --continue-on-failure && \
     rm -rf /microscanner
